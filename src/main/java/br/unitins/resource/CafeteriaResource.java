@@ -1,8 +1,10 @@
 package br.unitins.resource;
 
-import br.unitins.model.Cafeteria;
+
+
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -14,8 +16,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import br.unitins.model.Cafeteria;
+import br.unitins.repository.CafeteriaRepository;
+
+
+
 @Path("/cafeteria")
 public class CafeteriaResource {
+   
+@Inject
+private CafeteriaRepository repository;
+
     // Insere informações no Banco
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -66,4 +77,32 @@ public class CafeteriaResource {
         del.delete();
         return del;
      }
+
+      // Conta todos os objetos
+
+    @GET
+    @Path("/count")
+    public long count(){
+        return repository.count();
+    }
+
+    // Buscar por nome
+    
+    @GET
+    @Path("/search/{tipoBebida}")
+    public Cafeteria search(@PathParam("tipoBebida") String tipoBebida){
+        return repository.findByName(tipoBebida);
+    }
+
+    // DELETE por nome
+
+    @DELETE
+    @Path("/{tipoBebida}")
+    @Transactional
+    public Cafeteria delet(@PathParam("tipoBebida") String tipoBebida) {
+        Cafeteria cafeteriaDel = repository.findByName(tipoBebida);
+        repository.delete(cafeteriaDel);
+        return cafeteriaDel;
+    }
+
 }
