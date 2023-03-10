@@ -18,5 +18,4 @@ public class CafeteriaRepository implements PanacheRepository<Cafeteria> {
 
         return find("tipoBebida LIKE ?1", "%" + tipoBebida + "%").list();
     }
-    
 }
