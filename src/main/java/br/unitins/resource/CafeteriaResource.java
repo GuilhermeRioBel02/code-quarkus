@@ -1,7 +1,5 @@
 package br.unitins.resource;
 
-
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+
 import br.unitins.model.Cafeteria;
 import br.unitins.repository.CafeteriaRepository;
 
@@ -27,7 +26,8 @@ public class CafeteriaResource {
 @Inject
 private CafeteriaRepository repository;
 
-    // Insere informações no Banco
+    // Insere informações no Banco.
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
@@ -37,7 +37,8 @@ private CafeteriaRepository repository;
         return cafeteria;
     }
     
-    // Busca todos os Objetos dentro de uma Lista
+    // Busca todos os Objetos dentro de uma Lista.
+
     @GET
     @Path("/todas")
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,7 +46,8 @@ private CafeteriaRepository repository;
         return Cafeteria.findAll().list();
     }
 
-    // Atualizando parcialmente o Objeto
+    // Atualizando parcialmente o Objeto.
+
     @PATCH
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +60,8 @@ private CafeteriaRepository repository;
         return attCafeteria;
     }
 
-    // Busca o id específico
+    // Busca o id específico.
+
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,7 +69,8 @@ private CafeteriaRepository repository;
         return Cafeteria.findById(id);
      }
 
-     // Deleta Objeto do id informado
+     // Deleta Objeto do id informado.
+
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -78,7 +82,7 @@ private CafeteriaRepository repository;
         return del;
      }
 
-      // Conta todos os objetos
+      // Conta todos os objetos.
 
     @GET
     @Path("/count")
@@ -86,7 +90,7 @@ private CafeteriaRepository repository;
         return repository.count();
     }
 
-    // Buscar por nome
+    // Buscar por tipo de Bebida.
     
     @GET
     @Path("/search/{tipoBebida}")
@@ -94,7 +98,7 @@ private CafeteriaRepository repository;
         return repository.findByName(tipoBebida);
     }
 
-    // DELETE por nome
+    // DELETE por tipo de bebida.
 
     @DELETE
     @Path("/{tipoBebida}")
